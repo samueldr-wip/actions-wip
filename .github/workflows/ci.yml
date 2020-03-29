@@ -6,15 +6,15 @@ on:
     branches: [ "**" ]
 
 jobs:
-  parse:
+  "Parse .nix files":
     runs-on: [ubuntu-latest]
     steps:
       - uses: "actions/checkout@58070a9fc3a91197fc9cbf24841ea31a2ab19980"
       - uses: "cachix/install-nix-action@ebed63b0a20f20951a06a507ea1a1596bfce35b6"
-      - name: "Parse nix files"
+      - name: "Parse .nix files"
         run: |
           git ls-files | grep '.nix$' | xargs nix-instantiate --parse --quiet > /dev/null
-  doc:
+  "Build documentation":
     runs-on: [ubuntu-latest]
     steps:
       - uses: "actions/checkout@58070a9fc3a91197fc9cbf24841ea31a2ab19980"

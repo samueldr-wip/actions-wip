@@ -27,4 +27,13 @@ jobs:
         with:
           name: documentation
           path: built-documentation
-
+  Instantiation:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: "actions/checkout@58070a9fc3a91197fc9cbf24841ea31a2ab19980"
+      - uses: "cachix/install-nix-action@ebed63b0a20f20951a06a507ea1a1596bfce35b6"
+      - name: "Instantiation"
+        run: |
+          nix-env --out-path -qaP --no-name -f .ci/instantiate-all.nix \
+            | sed -e 's/\+\+/./g' \
+            | sort
